@@ -29,5 +29,10 @@
 # To learn more, please read the Rails Internationalization guide
 # available at https://guides.rubyonrails.org/i18n.html.
 
-en:
-  hello: "Hello world"
+views:
+  pagination: 
+    first: "首页"
+    last: "末页"
+    previous: "上一页"
+    next: "下一页"
+    truncate: ...

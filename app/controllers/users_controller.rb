@@ -4,8 +4,8 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    
-    @users=User.where(params[:user]).order(:id).page(params[:page]).per 5
+    @users = User.where(["user_name like ? or user_code like ?", "%#{params[:query_name]}%", "%#{params[:query_name]}%"]) if params[:query_name]
+    @users = @users.order(:id).page(params[:page]).per 5
   end
 
   # GET /users/1

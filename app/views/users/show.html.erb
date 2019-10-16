@@ -1,25 +1,26 @@
 <%- model_class = User -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+  <h1><%=t '.title', :default => "用户详情"%></h1>
 </div>
 
 <dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:user_code) %>:</strong></dt>
+  <dt><strong>用户编码:</strong></dt>
   <dd><%= @user.user_code %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:user_name) %>:</strong></dt>
+  <dt><strong>用户名:</strong></dt>
   <dd><%= @user.user_name %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:password) %>:</strong></dt>
+  <dt><strong>密码:</strong></dt>
   <dd><%= @user.password %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:user_type) %>:</strong></dt>
-  <dd><%= @user.user_type %></dd>
+  <dt><strong>用户类型:</strong></dt>
+  <dd><%= @user.user_type == 2 ? "普通用户" : "管理用户" %></dd>
 </dl>
-
-<%= link_to t('.back', :default => t("helpers.links.back")),
+<div style="text-align:center;" >
+  <%= link_to t('.back', :default => t("helpers.links.back")),
               users_path, :class => 'btn btn-default'  %>
-<%= link_to t('.edit', :default => t("helpers.links.edit")),
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
               edit_user_path(@user), :class => 'btn btn-default' %>
-<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
               user_path(@user),
               :method => 'delete',
               :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
               :class => 'btn btn-danger' %>
+</div>

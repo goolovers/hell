@@ -1,56 +1,59 @@
 <%- model_class = User -%>
-<div class="page-header">
-  <h1>用户管理</h1>
+<div class="page-breadcrumbs">
+  <ul class="breadcrumb">
+    <li>
+      <i class="fa fa-home"></i>
+      系统管理
+    </li>
+    <li class="active">用户管理</li>
+  </ul>
 </div>
 
-<%= form_tag("/users", method: "get") do %>
+<div class="page-body">
+  <%= form_tag("/users", method: "get") do %>
   <div class="widget-buttons" style="width: 300px;display:inline-block;">
     <span class="input-icon" >
       <%= text_field_tag :query_name, params[:query_name], class: "form-control input-xs", style: "width: 156px;", placeholder: "用户名/编码"%>
-
     </span>
   </div>
   <input id="subLogin" class="btn btn-primary" name ="subLogin" type="submit" value="查询" />
-<% end %>
+  <% end %>
 
 
-<table class="table table-striped table-bordered">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>登录账户</th>
-      <th>用户名</th>
-      <th>密码</th>
-      <th>用户类型</th>
-      <th>创建时间</th>
-      <th>操作</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @users.each do |user| %>
-    <tr>
-      <td><%= link_to user.id, user_path(user) %></td>
-      <td><%= user.user_code %></td>
-      <td><%= user.user_name %></td>
-      <td><%= user.password %></td>
-      <td><%= user.user_type %></td>
-      <td><%= user.created_at.strftime('%Y-%m-%d %H:%M:%S').to_s %></td>
-      <td>
-        <%= link_to t('.edit', :default => t("helpers.links.edit")),
-        edit_user_path(user), :class => 'btn btn-default btn-xs' %>
-        <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-        user_path(user),
-        :method => :delete,
-        :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-        :class => 'btn btn-xs btn-danger' %>
-      </td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>登录账户</th>
+        <th>用户名</th>
+        <th>密码</th>
+        <th>用户类型</th>
+        <th>创建时间</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+      <tr>
+        <td><%= link_to user.user_code, user_path(user) %></td>
+        <td><%= link_to user.user_name, user_path(user) %></td>
+        <td><%= user.password %></td>
+        <td><%= user.user_type == 2 ? "普通用户" : "管理用户" %></td>
+        <td><%= user.created_at.strftime('%Y-%m-%d %H:%M:%S').to_s %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+          edit_user_path(user), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+          user_path(user),
+          :method => :delete,
+          :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+          :class => 'btn btn-xs btn-danger' %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
   <div style="text-align:right" >
     <%=paginate@users%>
   </div>
-<%= link_to t('.new', :default => t("helpers.links.new")),
-new_user_path,
-:class => 'btn btn-primary' %>
+  <%= link_to t('.new', :default => t("helpers.links.new")), new_user_path, :class => 'btn btn-primary'%>
+</div>

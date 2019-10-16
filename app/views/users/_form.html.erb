@@ -16,36 +16,34 @@
   <% end %>
 
   <div class="form-group">
-    <%= f.label :user_code, :class => 'control-label col-lg-2' %>
+    <%= f.label :用户编码, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
       <%= f.text_field :user_code, :class => 'form-control' %>
     </div>
   </div>
   <div class="form-group">
-    <%= f.label :user_name, :class => 'control-label col-lg-2' %>
+    <%= f.label :用户名, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
       <%= f.text_field :user_name, :class => 'form-control' %>
     </div>
   </div>
   <div class="form-group">
-    <%= f.label :password, :class => 'control-label col-lg-2' %>
+    <%= f.label :密码, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
       <%= f.text_field :password, :class => 'form-control' %>
     </div>
   </div>
   <div class="form-group">
-    <%= f.label :user_type, :class => 'control-label col-lg-2' %>
+    <%= f.label :用户类型, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.text_field :user_type, :class => 'form-control' %>
+      <%= f.select :user_type, [['普通用户','2'], ['管理用户','1']], {},{:class => 'form-control'}%>
     </div>
   </div>
-
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-10">
-      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= f.submit "保存", :class => 'btn btn-primary' %>
       <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
                 users_path, :class => 'btn btn-default' %>
     </div>
   </div>
-
 <% end %>

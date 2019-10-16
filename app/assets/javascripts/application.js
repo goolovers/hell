@@ -8,7 +8,6 @@
 //= require jquery
 //= require_tree .
 //= require bootstrap-sprockets
-
 $(function() {
 	//$(".meun-item").click(function() {
 		//$(".meun-item").removeClass("meun-item-active");

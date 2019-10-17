@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
 
   layout "login"
+  skip_before_action :check_user, only: [:new, :create]
 
   def new
   end
@@ -17,7 +18,8 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-  	
+  	log_out if logged_in? #SessionsHelper中的方法
+    redirect_to root_path
   end
 
 end

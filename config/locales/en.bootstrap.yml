@@ -2,6 +2,13 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
+  activerecord:  
+    attributes:  
+      user:  
+        user_name: "用户名"
+        user_code: "用户编码"  
+        password: "密码"
+        
   breadcrumbs:
     application:
       root: "Index"

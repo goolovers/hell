@@ -1,0 +1,72 @@
+<%- model_class = Material -%>
+<div class="page-body">
+  <%= form_tag("/materials", method: "get") do %>
+  <div class="widget-body bordered-left bordered-warning form-inline">
+    <div class="form-group" >
+      <%= text_field_tag :material_name, params[:material_name], class: "form-control",  placeholder: "物料名称"%>
+    </div>
+    <div class="form-group" >
+      <%= text_field_tag :material_type, params[:material_type], class: "form-control",  placeholder: "设备类别"%>
+    </div>
+    <div class="form-group" >
+      <%= text_field_tag :material_code, params[:material_code], class: "form-control",  placeholder: "物料编码"%>
+    </div>
+    <div class="form-group" >
+      <%= text_field_tag :specs, params[:specs], class: "form-control",  placeholder: "规格型号"%>
+    </div>
+    <input id="subLogin" class="btn btn-primary" name ="subLogin" type="submit" value="查询" />
+  </div>
+  <% end %>
+
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>物料名称</th>
+        <th>设备类别</th>
+        <th>物料编码</th>
+        <th>规格型号</th>
+        <th>单位</th>
+        <th>品牌</th>
+        <th>供应商</th>
+        <th>税率</th>
+        <th>未税单价</th>
+        <th>含税单价</th>
+        <th>创建人</th>
+        <th>创建时间</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @materials.each do |material| %>
+      <tr>
+        <td><%= link_to material.material_name, material_path(material) %></td>
+        <td><%= material.material_type %></td>
+        <td><%= material.material_code %></td>
+        <td><%= material.specs %></td>
+        <td><%= material.unit %></td>
+        <td><%= material.brand %></td>
+        <td><%= material.supplier %></td>
+        <td><%= material.tax_rate %></td>
+        <td><%= material.before_tax %></td>
+        <td><%= material.after_tax %></td>
+        <td><%= material.user.user_name %></td>
+        <td><%= material.created_at.strftime('%Y-%m-%d %H:%M:%S').to_s %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+          edit_material_path(material), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+          material_path(material),
+          :method => :delete,
+          :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+          :class => 'btn btn-xs btn-danger' %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <div style="text-align:right" >
+    <%=paginate@materials%>
+  </div>
+  <%= link_to t('.new', :default => t("helpers.links.new")), new_material_path, :class => 'btn btn-primary'%>
+</div>

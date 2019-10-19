@@ -1,0 +1,40 @@
+<%- model_class = Material -%>
+<% provide(:title, "原材料详情") %>
+
+<dl class="dl-horizontal dl-table">
+  <dt><strong>物料名称:</strong></dt>
+  <dd><%= @material.material_name %></dd>
+  <dt><strong>物料类别:</strong></dt>
+  <dd><%= @material.material_type %></dd>
+  <dt><strong>物料编码:</strong></dt>
+  <dd><%= @material.material_code %><dd>
+  <dt><strong>规格型号:</strong></dt>
+  <dd><%= @material.specs %></dd>
+  <dt><strong>单位:</strong></dt>
+  <dd><%= @material.unit %></dd>
+  <dt><strong>品牌:</strong></dt>
+  <dd><%= @material.brand %></dd>
+  <dt><strong>供应商:</strong></dt>
+  <dd><%= @material.supplier %></dd>
+  <dt><strong>税率:</strong></dt>
+  <dd><%= @material.tax_rate %></dd>
+  <dt><strong>未税单价:</strong></dt>
+  <dd><%= @material.before_tax %></dd>
+  <dt><strong>含税单价:</strong></dt>
+  <dd><%= @material.after_tax %></dd>
+  <dt><strong>创建人:</strong></dt>
+  <dd><%= @material.user.user_name %></dd>
+  <dt><strong>备注:</strong></dt>
+  <dd><%= @material.remark %></dd>
+</dl>
+<div style="text-align:center;" >
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              materials_path, :class => 'btn btn-default'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_material_path(@material), :class => 'btn btn-default' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              material_path(@material),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>

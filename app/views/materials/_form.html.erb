@@ -1,0 +1,81 @@
+<%= form_for @material, :html => { :class => "form-horizontal material" } do |form| %>
+
+  <% if @material.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@material.errors.count, "处校验错误").to_s.chop %>:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @material.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+  <div class="form-group">
+    <%= form.label :物料名称,:class => 'control-label col-md-2 col-lg-2' %>
+    <div class="col-md-8 col-lg-8"><%= form.text_field :material_name, :class => 'form-control' %></div>
+    <font color="red">*</font>
+  </div>
+  
+  <div class="form-group">
+    <%= form.label :设备类别 ,:class => 'control-label col-md-2 col-lg-2' %>
+    <div class="col-md-8 col-lg-8"><%= form.text_field :material_type, :class => 'form-control' %></div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :物料编码,:class => 'control-label col-md-2 col-lg-2' %>
+    <div class="col-md-8 col-lg-8"><%= form.text_field :material_code, :class => 'form-control' %></div>
+    <font color="red">*</font>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :规格型号,:class => 'control-label col-md-2 col-lg-2' %>
+    <div class="col-md-8 col-lg-8"><%= form.text_field :specs, :class => 'form-control' %></div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :单位,:class => 'control-label col-md-2 col-lg-2' %>
+    <div class="col-md-8 col-lg-8"><%= form.text_field :unit, :class => 'form-control' %></div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :品牌,:class => 'control-label col-md-2 col-lg-2' %>
+   <div class="col-md-8 col-lg-8"><%= form.text_field :brand, :class => 'form-control' %></div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :供应商,:class => 'control-label col-md-2 col-lg-2' %>
+    <div class="col-md-8 col-lg-8"><%= form.text_field :supplier, :class => 'form-control' %></div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :税率,:class => 'control-label col-md-2 col-lg-2' %>
+    <div class="col-md-8 col-lg-8"><%= form.number_field :tax_rate, :in => 1..100, :class => 'form-control' %></div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :未税单价,:class => 'control-label col-md-2 col-lg-2' %>
+    <div class="col-md-8 col-lg-8"><%= form.number_field :before_tax, :step => 0.01,:class => 'form-control' %></div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :含税单价,:class => 'control-label col-md-2 col-lg-2' %>
+    <div class="col-md-8 col-lg-8"><%= form.number_field :after_tax, :step => 0.01, :class => 'form-control' %></div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :备注,:class => 'control-label col-md-2 col-lg-2' %>
+    <div class="col-md-8 col-lg-8"><%= form.text_area :remark, :class => 'form-control' %></div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-md-8 col-lg-8">
+      <%= form.submit "保存", :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                materials_path, :class => 'btn btn-default' %>
+    </div>
+  </div>
+<% end %>

@@ -3,12 +3,12 @@
 
 <div class="page-body">
   <%= form_tag("/users", method: "get") do %>
-  <div class="widget-buttons" style="width: 300px;display:inline-block;">
-    <span class="input-icon" >
-      <%= text_field_tag :query_name, params[:query_name], class: "form-control input-xs", style: "width: 156px;", placeholder: "用户名/编码"%>
-    </span>
+  <div class="widget-body bordered-left bordered-warning form-inline">
+    <div class="form-group" >
+      <%= text_field_tag :query_name, params[:query_name], class: "form-control",  placeholder: "用户名/编码"%>
+    </div>
+    <input id="subLogin" class="btn btn-primary" name ="subLogin" type="submit" value="查询" />
   </div>
-  <input id="subLogin" class="btn btn-primary" name ="subLogin" type="submit" value="查询" />
   <% end %>
 
 

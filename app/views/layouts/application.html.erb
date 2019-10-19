@@ -84,14 +84,30 @@
                     <img src="/assets/img/avatars/adam-jansen.jpg">
                   </div>
                   <section>
-                    <h2><span class="profile"><span><%=current_user.user_name%>,您好！</span></span></h2>
+                    <h2><span class="profile">
+                            <span>
+                                <%=current_user.user_name%>,您好！
+                            </span>
+                    </span></h2>
                   </section>
                 </a>
 
               </li>
-
+              <li>
+                <a class="login-area dropdown-toggle" href="/logout">
+                  
+                  <section>
+                    <h2><span class="profile">
+                            <span>
+                               退出登录
+                            </span>
+                    </span></h2>
+                  </section>
+                </a>
+              </li>
             </ul>
 
+            
           </div>
         </div>
         <!-- /Account Area  -->
@@ -151,7 +167,7 @@
 
             <ul class="submenu" style="display: none;">
               <li>
-                <a href="/users">
+                <a href="/materials">
                   <span class="menu-text">配件档案</span>
                 </a>
               </li>

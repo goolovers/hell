@@ -17,7 +17,7 @@ gem 'turbolinks', '~> 5'
 #gem 'pjax_rails'  
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.7'
+#gem 'jbuilder', '~> 2.7'
 
 gem 'nokogiri', '~>1.10.4'
 

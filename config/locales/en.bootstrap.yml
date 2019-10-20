@@ -11,8 +11,13 @@ en:
 
       material:  
         material_name: "物料名称"
-        material_code: "物料编码"  
+        material_code: "物料编码" 
+        after_tax: "含税单价"
 
+      product:  
+        material_name: "物料名称"
+        material_code: "物料编码" 
+        
   breadcrumbs:
     application:
       root: "Index"

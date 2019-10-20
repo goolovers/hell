@@ -1,0 +1,207 @@
+<%= form_for @product, :html => { :class => "form-horizontal product" } do |form| %>
+
+  <% if @product.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@product.errors.count, "处校验错误").to_s.chop %>:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @product.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :物料名称,:class => 'control-label col-md-2 col-lg-2' %>
+    <div class="col-md-8 col-lg-8"><%= form.text_field :material_name, :class => 'form-control' %></div>
+    <font color="red">*</font>
+  </div>
+  
+  <div class="form-group">
+    <%= form.label :设备类别 ,:class => 'control-label col-md-2 col-lg-2' %>
+    <div class="col-md-8 col-lg-8"><%= form.text_field :material_type, :class => 'form-control' %></div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :物料编码,:class => 'control-label col-md-2 col-lg-2' %>
+    <div class="col-md-8 col-lg-8"><%= form.text_field :material_code, :class => 'form-control' %></div>
+    <font color="red">*</font>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :规格型号,:class => 'control-label col-md-2 col-lg-2' %>
+    <div class="col-md-8 col-lg-8"><%= form.text_field :specs, :class => 'form-control' %></div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :单位,:class => 'control-label col-md-2 col-lg-2' %>
+    <div class="col-md-8 col-lg-8"><%= form.text_field :unit, :class => 'form-control' %></div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :品牌,:class => 'control-label col-md-2 col-lg-2' %>
+   <div class="col-md-8 col-lg-8"><%= form.text_field :brand, :class => 'form-control' %></div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :供应商,:class => 'control-label col-md-2 col-lg-2' %>
+    <div class="col-md-8 col-lg-8"><%= form.text_field :supplier, :class => 'form-control' %></div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :备注,:class => 'control-label col-md-2 col-lg-2' %>
+    <div class="col-md-8 col-lg-8"><%= form.text_area :remark, :class => 'form-control' %></div>
+  </div>
+
+  <!-- 配件表单 -->
+  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-10 col-md-offset-2">
+    <div class="widget  radius-bordered">
+      <div class="widget-header">
+        <span class="widget-caption">配件清单</span>
+      </div>
+      <div class="widget-body">
+        <div class="docs-example">
+          <div class="tab-content tabs-flat">
+            <div class="tab-pane active" id="material-tab">
+
+              
+              <% @product.productItems.map {|productItem|  %>
+              <div class="form-group has-feedback">
+                <label class="col-lg-3 control-label">配件：</label>
+                <div class="col-lg-6">
+                  <input type="text" readonly="readonly" class="form-control" value="<%=productItem.material.material_name%>" >
+                  <input type="hidden" name="productMaterial[]" id="productMaterial" value="<%=productItem.material.id%>" >
+                </div>
+                <div class="col-lg-3">
+                  <input type="text" class="form-control" name="productMaterialNum[]" id="productMaterialNum" value="<%=productItem.num%>">
+                </div>
+              </div>
+              <%} %>
+
+            </div>
+
+          </div>
+          <div class="form-group">
+            <div class="col-lg-8 col-lg-offset-4">
+              <button type="button" class="btn btn-palegreen" id="addMaterial">新增配件</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end 配件表单 -->
+
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-md-8 col-lg-8">
+      <button type="button" class="btn btn-primary" id="saveForm">保存</button>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                products_path, :class => 'btn btn-default' %>
+    </div>
+  </div>
+<% end %>
+
+<!-- file 选择 模态框 -->
+<div id="material_dialog" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="title" aria-hidden="true">
+  <div class="modal-dialog" style="width:480px;">
+    <div class="modal-content">
+      <!-- 模框头部 -->
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"
+        aria-hidden="true">×
+      </button>
+      <h4 class="modal-title">请选择配件</h4>
+      </div>
+      <!-- 模框主体 -->
+      <div class="modal-body">
+
+        <div class="form-group has-feedback">
+          <label class="col-lg-3 control-label">配件：</label>
+          <div class="col-lg-6">
+            <select class="form-control" name="productMaterial[]" id="material_dialog_meterial">
+              <%= options_from_collection_for_select(Material.all, :id, :material_name) %>
+            </select>
+          </div>
+          <div class="col-lg-3">
+            <input type="text" class="form-control" name="productMaterialNum[]" id="material_dialog_meterial_num" value="0">
+          </div>
+        </div>
+
+      </div>
+
+      <br>
+      <div class="form-group has-feedback alert alert-danger fade in" hidden="hidden" id="selectError">
+        <i class="fa-fw fa fa-times"></i>
+        <strong>错误!</strong> 配件已存在.
+      </div>
+
+      <!-- 模框底部 -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary"id="material_dialog_sureBtn">添加</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"id="material_dialog_cancelBtn">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--模板 -->
+<div class="form-group has-feedback" hidden="hidden" id="material_tmp">
+  <label class="col-lg-3 control-label">配件：</label>
+  <div class="col-lg-6">
+    <input type="text" readonly="readonly" id="product_material_name" class="form-control">
+    <input type="hidden" name="productMaterial[]" id="product_material_id">
+  </div>
+  <div class="col-lg-3">
+    <input type="text" class="form-control" name="productMaterialNum[]" id="product_material_num">
+  </div>
+</div>
+
+<script>
+  $(function() {
+    $("#addMaterial").click(function(){
+      $("#material_dialog").modal().find("#selectError").hide();
+    });
+
+    $("#material_dialog_sureBtn").click(function(){
+      var isNewType = true;
+      var material_id = $("#material_dialog_meterial option:selected").val()
+      $("#material-tab input[name='productMaterial[]']").each(function(){
+        if($(this).val() == material_id){
+          isNewType = false;
+        }
+      });
+
+      if(!isNewType){
+        $("#selectError").show();
+        return;
+      }else{
+        $("#material_dialog").find("#selectError").hide();
+      }
+
+      var $tmp = $("#material_tmp").clone();
+      $tmp.find("#product_material_name").val($("#material_dialog_meterial option:selected").text());
+      $tmp.find("#product_material_id").val(material_id);
+      $tmp.find("#product_material_num").val($("#material_dialog_meterial_num").val());
+      $tmp.show().appendTo($("#material-tab"));
+    });
+
+    $("#saveForm").click(function(){
+      var numNotNull = true;
+      $("#material-tab input[name='productMaterialNum[]']").each(function(){
+        if($(this).val() == ""){
+          numNotNull = false;
+        }
+      });
+      if(numNotNull)
+        $("form").submit();
+      else
+        alert("配件数量不能为空！");
+    });
+  });
+</script>

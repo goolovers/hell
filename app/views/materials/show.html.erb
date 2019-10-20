@@ -1,32 +1,91 @@
 <%- model_class = Material -%>
-<% provide(:title, "原材料详情") %>
+<% provide(:title, "基础档案 / 配件档案 / 配件详情") %>
+<div class="form-horizontal material">
+  <div class="form-group">
+    <label class="control-label col-md-2 col-lg-2">物料名称</label>
+    <div class="col-md-8 col-lg-8">
+      <input class="form-control" type="text" value="<%=@material.material_name%>" readonly="readonly">
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label class="control-label col-md-2 col-lg-2">设备类别</label>
+    <div class="col-md-8 col-lg-8">
+      <input class="form-control" type="text" readonly="readonly" value="<%=@material.material_type%>" id="product_material_type">
+    </div>
+  </div>
 
-<dl class="dl-horizontal dl-table">
-  <dt><strong>物料名称:</strong></dt>
-  <dd><%= @material.material_name %></dd>
-  <dt><strong>物料类别:</strong></dt>
-  <dd><%= @material.material_type %></dd>
-  <dt><strong>物料编码:</strong></dt>
-  <dd><%= @material.material_code %><dd>
-  <dt><strong>规格型号:</strong></dt>
-  <dd><%= @material.specs %></dd>
-  <dt><strong>单位:</strong></dt>
-  <dd><%= @material.unit %></dd>
-  <dt><strong>品牌:</strong></dt>
-  <dd><%= @material.brand %></dd>
-  <dt><strong>供应商:</strong></dt>
-  <dd><%= @material.supplier %></dd>
-  <dt><strong>税率:</strong></dt>
-  <dd><%= @material.tax_rate %></dd>
-  <dt><strong>未税单价:</strong></dt>
-  <dd><%= @material.before_tax %></dd>
-  <dt><strong>含税单价:</strong></dt>
-  <dd><%= @material.after_tax %></dd>
-  <dt><strong>创建人:</strong></dt>
-  <dd><%= @material.user.user_name %></dd>
-  <dt><strong>备注:</strong></dt>
-  <dd><%= @material.remark %></dd>
-</dl>
+  <div class="form-group">
+    <label class="control-label col-md-2 col-lg-2">物料编码</label>
+    <div class="col-md-8 col-lg-8">
+      <input class="form-control" type="text" value="<%=@material.material_code%>" readonly="readonly">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-md-2 col-lg-2">规格型号</label>
+    <div class="col-md-8 col-lg-8">
+      <input class="form-control" type="text" value="<%=@material.specs%>" readonly="readonly">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-md-2 col-lg-2">单位</label>
+    <div class="col-md-8 col-lg-8">
+      <input class="form-control" type="text" value="<%=@material.unit%>" readonly="readonly">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-md-2 col-lg-2">品牌</label>
+    <div class="col-md-8 col-lg-8">
+      <input class="form-control" type="text" value="<%=@material.brand%>" name="product[brand]" id="product_brand">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-md-2 col-lg-2">供应商</label>
+    <div class="col-md-8 col-lg-8">
+      <input class="form-control" type="text" value="<%=@material.supplier%>" readonly="readonly">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-md-2 col-lg-2">税率</label>
+    <div class="col-md-8 col-lg-8">
+      <input class="form-control" type="text" value="<%=@material.tax_rate%>" readonly="readonly">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-md-2 col-lg-2">未税单价</label>
+    <div class="col-md-8 col-lg-8">
+      <input class="form-control" type="text" value="<%=@material.before_tax%>" readonly="readonly">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-md-2 col-lg-2">含税单价</label>
+    <div class="col-md-8 col-lg-8">
+      <input class="form-control" type="text" value="<%=@material.after_tax%>" readonly="readonly">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-md-2 col-lg-2">创建人</label>
+    <div class="col-md-8 col-lg-8">
+      <input class="form-control" type="text" value="<%=@material.user.user_name%>" readonly="readonly">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-md-2 col-lg-2">备注</label>
+    <div class="col-md-8 col-lg-8">
+      <textarea class="form-control" readonly="readonly"><%=@material.remark%></textarea>
+    </div>
+  </div>
+</div>
+
 <div style="text-align:center;" >
   <%= link_to t('.back', :default => t("helpers.links.back")),
               materials_path, :class => 'btn btn-default'  %>

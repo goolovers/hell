@@ -34,25 +34,6 @@
 
   <!--Skin Script: Place this script in head to load scripts for skins and rtl support-->
   <script src="/bootstraptmp/js/skins.min.js"></script>
-
-  <style type="text/css">
-    .dl-table{
-        width: 80%;
-        margin: auto;
-        border:1px solid #DCEBF7;
-    }
-    .dl-table dt{
-        text-align : right;
-        font-size : 14px;
-        background-color:#EDF3F4;
-        border-top:1px solid #F7FBFF;
-    }
-    .dl-table dd{
-        font-size : 14px;
-        border-top:1px solid #F7FBFF;
-    }
-  </style>
-
 </head>
 <!-- /Head -->
 <!-- Body -->
@@ -135,7 +116,7 @@
           <!--系统管理-->
           <li>
             <a href="#" class="menu-dropdown">
-              <i class="menu-icon fa fa-table"></i>
+              <i class="menu-icon typcn typcn-user"></i>
               <span class="menu-text"> 系统管理 </span>
 
               <i class="menu-expand"></i>
@@ -148,7 +129,7 @@
               </li>
               <li>
                 <a href="/users">
-                  <span class="menu-text">Data Tables</span>
+                  <span class="menu-text">权限管理</span>
                 </a>
               </li>
             </ul>
@@ -159,7 +140,7 @@
           <!--基础档案-->
           <li class="">
             <a href="#" class="menu-dropdown">
-              <i class="menu-icon fa fa-table"></i>
+              <i class="menu-icon fa fa-desktop"></i>
               <span class="menu-text"> 基础档案 </span>
 
               <i class="menu-expand"></i>
@@ -172,12 +153,47 @@
                 </a>
               </li>
               <li>
-                <a href="/users">
+                <a href="/products">
                   <span class="menu-text">产品档案</span>
+                </a>
+              </li>
+              <li>
+                <a href="/products">
+                  <span class="menu-text">项目</span>
                 </a>
               </li>
             </ul>
           </li>
+          <!--基础档案-->
+
+          <!--库存管理-->
+          <li class="">
+            <a href="#" class="menu-dropdown">
+              <i class="menu-icon typcn typcn-shopping-bag"></i>
+              <span class="menu-text"> 库存管理 </span>
+
+              <i class="menu-expand"></i>
+            </a>
+
+            <ul class="submenu" style="display: none;">
+              <li>
+                <a href="/materials">
+                  <span class="menu-text">原材料库</span>
+                </a>
+              </li>
+              <li>
+                <a href="/products">
+                  <span class="menu-text">成品库</span>
+                </a>
+              </li>
+              <li>
+                <a href="/products">
+                  <span class="menu-text">项目库</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <!--基础档案-->
 
         </ul>
         <!-- /Sidebar Menu -->
@@ -192,7 +208,7 @@
           <ul class="breadcrumb">
             <li>
               <i class="fa fa-home"></i>
-              <%=full_title(yield(:title))%>
+              <%=yield(:title)%>
             </li>
           </ul>
         </div>
@@ -229,6 +245,5 @@
 
 <!--Beyond Scripts-->
 <script src="/bootstraptmp/js/beyond.min.js"></script>
-
 </body>
 </html>

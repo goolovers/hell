@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  material_type: MyString
+  material_code: MyString
+  material_name: MyString
+  specs: MyString
+  unit: MyString
+  brand: MyString
+  num: 1
+  supplier: MyString
+  remark: MyText
+
+two:
+  material_type: MyString
+  material_code: MyString
+  material_name: MyString
+  specs: MyString
+  unit: MyString
+  brand: MyString
+  num: 1
+  supplier: MyString
+  remark: MyText

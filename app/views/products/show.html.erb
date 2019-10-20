@@ -1,0 +1,112 @@
+<% provide(:title, "基础档案 / 产品档案 / 产品明细") %>
+
+<div class="form-horizontal product">
+  <div class="form-group">
+    <label class="control-label col-md-2 col-lg-2" for="product_物料名称">物料名称</label>
+    <div class="col-md-8 col-lg-8">
+      <input class="form-control" type="text" value="<%=@product.material_name%>" readonly="readonly">
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label class="control-label col-md-2 col-lg-2">设备类别</label>
+    <div class="col-md-8 col-lg-8">
+      <input class="form-control" type="text" readonly="readonly" value="<%=@product.material_type%>" id="product_material_type">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-md-2 col-lg-2" for="product_物料编码">物料编码</label>
+    <div class="col-md-8 col-lg-8">
+      <input class="form-control" type="text" value="<%=@product.material_code%>" readonly="readonly">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-md-2 col-lg-2" for="product_规格型号">规格型号</label>
+    <div class="col-md-8 col-lg-8">
+      <input class="form-control" type="text" value="<%=@product.specs%>" readonly="readonly">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-md-2 col-lg-2" for="product_单位">单位</label>
+    <div class="col-md-8 col-lg-8">
+      <input class="form-control" type="text" value="<%=@product.unit%>" readonly="readonly">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-md-2 col-lg-2" for="product_品牌">品牌</label>
+    <div class="col-md-8 col-lg-8">
+      <input class="form-control" type="text" value="<%=@product.brand%>" readonly="readonly">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-md-2 col-lg-2" for="product_供应商">供应商</label>
+    <div class="col-md-8 col-lg-8">
+      <input class="form-control" type="text" value="<%=@product.supplier%>" readonly="readonly">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-md-2 col-lg-2" for="product_备注">备注</label>
+    <div class="col-md-8 col-lg-8">
+      <textarea class="form-control" readonly="readonly"><%=@product.remark%></textarea>
+    </div>
+  </div>
+
+  <!-- 配件表单 -->
+  <div class="col-lg-8 col-md-8 col-sm-8 col-xs-10 col-md-offset-2">
+    <div class="widget  radius-bordered">
+      <div class="widget-header">
+        <span class="widget-caption">配件清单</span>
+      </div>
+      <div class="widget-body">
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th><h5 class="no-margin-bottom text-center">物料名称</h5></th>
+              <th><h5 class="no-margin-bottom text-center">物料编码</h5></th>
+              <th><h5 class="no-margin-bottom text-center">数量</h5></th>
+              <th><h5 class="no-margin-bottom text-center">含税价格</h5></th>
+              <th><h5 class="no-margin-bottom text-center">总价</h5></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% sub_totle = 0;
+              @product.productItems.map {|productItem|  
+              sub_totle += productItem.material.after_tax * productItem.num%>
+            <tr>
+              <td class="text-center"><%= link_to productItem.material.material_name, material_path(productItem.material.id) %></td>
+              <td class="text-center"><%=productItem.material.material_code%></td>
+              <td class="text-center"><%=productItem.num%></td>
+              <td class="text-center"><%=productItem.material.after_tax%></td>
+              <td class="text-center"><%=productItem.material.after_tax * productItem.num%></td>
+            </tr>
+            <%} %>
+            <tr>
+              <td colspan="3" class="invisible bg-snow"></td>
+              <td class="text-center">配件总价</td>
+              <td class="text-center"><%=sub_totle%></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-md-8 col-lg-8">
+      <%= link_to t('.back', :default => t("helpers.links.back")),
+      products_path, :class => 'btn btn-default'  %>
+      <%= link_to t('.edit', :default => t("helpers.links.edit")),
+      edit_product_path(@product), :class => 'btn btn-default' %>
+      <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+      product_path(@product),
+      :method => 'delete',
+      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+      :class => 'btn btn-danger' %>
+    </div>
+  </div>

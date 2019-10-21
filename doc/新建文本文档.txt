@@ -1,0 +1,62 @@
+用户表： --不能删除
+user_name:string
+user_code:string
+password:string
+user_type:int
+
+
+配件表：material --不能删除
+物料名称 material_name:string
+物料类别 material_type:string 
+物料编码 material_code:string
+规格型号 specs:string
+单位 unit:string 
+品牌 brand:string
+供应商 supplier:string
+税率 tax_rate:integer
+未税单价 before_tax:float
+含税单价 after_tax:float
+备注 remark:text
+创建人 user_id
+rails generate scaffold material material_type:string material_code:string material_name:string specs:string unit:string brand:string num:integer supplier:string tax_rate:integer before_tax:float after_tax:float remark:text
+
+产品表：product --不能删除
+物料名称 material_name:string
+物料类别 material_type:string 
+物料编码 material_code:string
+规格型号 specs:string
+单位 unit:string 
+品牌 brand:string
+供应商 supplier:string
+创建人 user_id
+备注 remark:text
+rails generate scaffold product material_type:string material_code:string material_name:string specs:string unit:string brand:string num:integer supplier:string remark:text user_id:integer
+
+
+产品配料表 product_item  
+数量 num
+产品ID product_id
+原材料ID  material_id
+rails generate scaffold productItem num:integer product_id:integer material_id:integer
+
+项目表 project -- 不能删除  
+项目名称 name
+项目状态 status -- 售前、实施中、售后
+计划开始时间 plan_start_time
+计划结束时间 plan_end_time
+实际开始时间 start_time
+实际结束时间 end_time
+项目负责人 charge
+rails generate scaffold productItem num:integer product_id:integer material_id:integer
+
+库房表 storehouse
+库房名称 name
+库房位置 location
+库房类别 wh_type --1:原材料库 2：成品库
+库房管理员
+备注
+
+库存表 storage
+库存数量：num
+库存类别：storage_type -- material、product、project
+库存

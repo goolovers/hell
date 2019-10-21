@@ -29,8 +29,6 @@ class ProductsController < ApplicationController
     @product = Product.new(product_params)
     @product.user_id = session[:user_id]
 
-    
-
     if @product.save
       params[:productMaterial].each_with_index  do |x,index|
         productItem = ProductItem.new(product_id: @product.id, material_id: x, num: params[:productMaterialNum][index])

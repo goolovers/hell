@@ -33,7 +33,7 @@ rails generate scaffold material material_type:string material_code:string mater
 rails generate scaffold product material_type:string material_code:string material_name:string specs:string unit:string brand:string num:integer supplier:string remark:text user_id:integer
 
 
-产品配料表 product_item  
+产品配件表 product_item  
 数量 num
 产品ID product_id
 原材料ID  material_id
@@ -49,14 +49,32 @@ rails generate scaffold productItem num:integer product_id:integer material_id:i
 项目负责人 charge
 rails generate scaffold productItem num:integer product_id:integer material_id:integer
 
-库房表 storehouse
-库房名称 name
-库房位置 location
-库房类别 wh_type --1:原材料库 2：成品库
-库房管理员
-备注
+项目物资表 project_material
+项目ID：project_id
+
+
 
 库存表 storage
 库存数量：num
 库存类别：storage_type -- material、product、project
-库存
+设备标识：material_product_id
+设备类别：material_product_type -- material、product
+
+出入库记录 ： io_task
+出入库类别：io_type --0:出库，1入库
+出入库原因：io_reason --
+出入库时间：io_at
+发起人：apply_user_id
+执行人: exec_user_id
+状态：status --未审批、已审批/未出库、已完成
+
+出入库明细：io_task_det
+出入库任务标识：io_task_id
+设备类别：material_product_type -- material、product
+设备标识：material_product_id
+数量：num
+
+码表 p_code
+类别：type_code
+码值：code
+名称：name

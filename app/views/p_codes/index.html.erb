@@ -1,0 +1,46 @@
+<%- model_class = PCode -%>
+<% provide(:title, "系统管理 / 码值维护") %>
+<div class="page-body">
+  <%= form_tag("/p_codes", method: "get") do %>
+  <div class="widget-body bordered-left bordered-warning form-inline">
+    <div class="form-group" >
+      <%= text_field_tag :type_code, params[:type_code], class: "form-control",  placeholder: "编码类别"%>
+    </div>
+    <input id="subLogin" class="btn btn-primary" name ="subLogin" type="submit" value="查询" />
+  </div>
+  <% end %>
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>编码类别</th>
+      <th>码值</th>
+      <th>码值名称</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @p_codes.each do |p_code| %>
+      <tr>
+        <td><%= p_code.type_code %></td>
+        <td><%= link_to p_code.code, p_code_path(p_code) %></td>
+        <td><%= link_to p_code.name, p_code_path(p_code) %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+          edit_p_code_path(p_code), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+          p_code_path(p_code),
+          :method => :delete,
+          :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+          :class => 'btn btn-xs btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+  <div style="text-align:right" >
+    <%=paginate@p_codes%>
+  </div>
+  <%= link_to t('.new', :default => t("helpers.links.new")), new_p_code_path, :class => 'btn btn-primary'%>
+</div>

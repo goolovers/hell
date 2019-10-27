@@ -10,7 +10,7 @@ class MaterialsController < ApplicationController
     @materials = @materials.where("material_type like ?",  "%#{params[:material_type]}%") if params[:material_type]
     @materials = @materials.where("material_code like ?",  "%#{params[:material_code]}%") if params[:material_code]
     @materials = @materials.where("specs like ?",  "%#{params[:specs]}%") if params[:specs]
-    @materials = @materials.order(:id).page(params[:page]).per 5
+    @materials = @materials.order("id desc").page(params[:page]).per 10
   end
 
   # GET /materials/1

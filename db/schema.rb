@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_19_125234) do
+ActiveRecord::Schema.define(version: 2019_10_27_092143) do
 
   create_table "_users_old_20191011", force: :cascade do |t|
     t.string "user_code"
@@ -39,6 +39,14 @@ ActiveRecord::Schema.define(version: 2019_10_19_125234) do
     t.integer "user_id"
   end
 
+  create_table "p_codes", force: :cascade do |t|
+    t.string "type_code"
+    t.string "code"
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "product_items", force: :cascade do |t|
     t.integer "num"
     t.integer "product_id"
@@ -60,6 +68,40 @@ ActiveRecord::Schema.define(version: 2019_10_19_125234) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
+  end
+
+  create_table "project_materials", force: :cascade do |t|
+    t.integer "project_id"
+    t.integer "material_id"
+    t.string "stock_type"
+    t.integer "need_num"
+    t.integer "stock_num"
+    t.integer "project_num"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "project_products", force: :cascade do |t|
+    t.integer "project_id"
+    t.integer "product_id"
+    t.string "stock_type"
+    t.integer "need_num"
+    t.integer "stock_num"
+    t.integer "project_num"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.string "name"
+    t.string "status"
+    t.datetime "plan_start_time"
+    t.datetime "plan_end_time"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.string "charge"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "tests", force: :cascade do |t|

@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  status: MyString
+  plan_start_time: 2019-10-26 21:46:46
+  plan_end_time: 2019-10-26 21:46:46
+  start_time: 2019-10-26 21:46:46
+  end_time: 2019-10-26 21:46:46
+  charge: MyString
+
+two:
+  name: MyString
+  status: MyString
+  plan_start_time: 2019-10-26 21:46:46
+  plan_end_time: 2019-10-26 21:46:46
+  start_time: 2019-10-26 21:46:46
+  end_time: 2019-10-26 21:46:46
+  charge: MyString

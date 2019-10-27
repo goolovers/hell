@@ -16,7 +16,7 @@
   <% end %>
 
   <div class="form-group">
-    <%= form.label :物料名称,:class => 'control-label col-md-2 col-lg-2' %>
+    <%= form.label :产品名称,:class => 'control-label col-md-2 col-lg-2' %>
     <div class="col-md-8 col-lg-8"><%= form.text_field :material_name, :class => 'form-control' %></div>
     <font color="red">*</font>
   </div>
@@ -106,7 +106,7 @@
   </div>
 <% end %>
 
-<!-- file 选择 模态框 -->
+<!-- file 弹出框 -->
 <div id="material_dialog" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="title" aria-hidden="true">
   <div class="modal-dialog" style="width:480px;">
     <div class="modal-content">
@@ -148,6 +148,7 @@
     </div>
   </div>
 </div>
+<!-- end 弹出框 -->
 
 
 <!--模板 -->

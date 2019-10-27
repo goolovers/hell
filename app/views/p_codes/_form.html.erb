@@ -1,0 +1,45 @@
+<%= form_for @p_code, :html => { :class => "form-horizontal p_code" } do |f| %>
+  <% if @p_code.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@p_code.errors.count, "处校验错误").to_s.chop %>:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @p_code.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :编码类别, :class => 'control-label col-md-2 col-lg-2' %>
+    <div class="col-md-8 col-lg-8">
+      <%= f.text_field :type_code, :class => 'form-control' %>
+    </div>
+    <font color="red">*</font>
+  </div>
+  <div class="form-group">
+    <%= f.label :码值, :class => 'control-label col-md-2 col-lg-2' %>
+    <div class="col-md-8 col-lg-8">
+      <%= f.text_field :code, :class => 'form-control' %>
+    </div>
+    <font color="red">*</font>
+  </div>
+  <div class="form-group">
+    <%= f.label :名称, :class => 'control-label col-md-2 col-lg-2' %>
+    <div class="col-md-8 col-lg-8">
+      <%= f.text_field :name, :class => 'form-control' %>
+    </div>
+    <font color="red">*</font>
+  </div>
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-md-8 col-lg-8">
+      <%= f.submit "保存", :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                p_codes_path, :class => 'btn btn-default' %>
+    </div>
+  </div>
+<% end %>

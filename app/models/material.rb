@@ -8,4 +8,9 @@ class Material < ApplicationRecord
 	validates :after_tax, presence: {message:'不可为空！'}
 
 	belongs_to :user
+
+	def name_with_unit
+	  return "#{self.material_name} (#{self.unit})"
+	end
+
 end

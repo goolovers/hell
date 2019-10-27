@@ -88,7 +88,7 @@
 
 <div style="text-align:center;" >
   <%= link_to t('.back', :default => t("helpers.links.back")),
-              materials_path, :class => 'btn btn-default'  %>
+              "javascript:window.history.back(-1);", :class => 'btn btn-default'  %>
   <%= link_to t('.edit', :default => t("helpers.links.edit")),
               edit_material_path(@material), :class => 'btn btn-default' %>
   <%= link_to t('.destroy', :default => t("helpers.links.destroy")),

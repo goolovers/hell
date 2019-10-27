@@ -8,5 +8,17 @@ class Product < ApplicationRecord
 
 	belongs_to :user
 	has_many :productItems
+
+	def name_with_unit
+	  return "#{self.material_name} (#{self.unit})"
+	end
+
+	def after_tax
+	  totle = 0;
+	  self.productItems.each{ |item|
+	  	totle += item.num * item.material.after_tax
+	  }
+	  return totle
+	end
 	
 end

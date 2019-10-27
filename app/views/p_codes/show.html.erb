@@ -1,0 +1,37 @@
+<%- model_class = PCode -%>
+<% provide(:title, "系统管理 / 码值维护 / 详情") %>
+<div class="form-horizontal user">
+  <div class="form-group">
+    <label class="control-label col-md-2 col-lg-2">码值类别</label>
+    <div class="col-md-8 col-lg-8">
+      <input class="form-control" type="text" value="<%=@p_code.type_code%>" readonly="readonly">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-md-2 col-lg-2">码值</label>
+    <div class="col-md-8 col-lg-8">
+      <input class="form-control" type="text" value="<%=@p_code.code%>" readonly="readonly">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-md-2 col-lg-2">名称</label>
+    <div class="col-md-8 col-lg-8">
+      <input class="form-control" type="text" value="<%=@p_code.name%>" readonly="readonly">
+    </div>
+  </div>
+
+</div>
+
+<div style="text-align:center;" >
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              p_codes_path, :class => 'btn btn-default'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_p_code_path(@p_code), :class => 'btn btn-default' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              p_codes_path(@p_code),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>

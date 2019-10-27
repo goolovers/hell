@@ -15,8 +15,13 @@ en:
         after_tax: "含税单价"
 
       product:  
-        material_name: "物料名称"
-        material_code: "物料编码" 
+        material_name: "产品名称"
+        material_code: "物料编码"
+
+      p_code:  
+        type_code: "码值类别"
+        code: "码值"
+        name: "名称"
         
   breadcrumbs:
     application:

@@ -1,0 +1,361 @@
+<%= form_for @project, :html => { :class => "form-horizontal project" } do |f| %>
+  <% if @project.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@project.errors.count, "处校验错误").to_s.chop %>:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @project.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :项目名称, :class => 'control-label col-md-2 col-lg-2' %>
+    <div class="col-md-8 col-lg-8">
+      <%= f.text_field :name, :class => 'form-control' %>
+    </div>
+    <font color="red">*</font>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :项目状态, :class => 'control-label col-md-2 col-lg-2' %>
+    <div class="col-md-8 col-lg-8">
+      <%= f.collection_select(:status, getPCodes("project_status"), :code, :name , {},:class => "form-control",:selected => @project.status) %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :计划开始时间, :class => 'control-label col-md-2 col-lg-2' %>
+    <div class="col-md-8 col-lg-8">
+      <div class='input-group date' id='datetimepicker_plan_start_time' >
+        <%= f.text_field :plan_start_time, :class => 'form-control' , :autocomplete => "off"%>
+        <span class="input-group-addon">
+          <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :计划结束时间, :class => 'control-label col-md-2 col-lg-2' %>
+    <div class="col-md-8 col-lg-8">
+      <div class='input-group date' id='datetimepicker_plan_end_time' >
+        <%= f.text_field :plan_end_time, :class => 'form-control', :autocomplete => "off"%>
+        <span class="input-group-addon">
+          <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :实际开始时间, :class => 'control-label col-md-2 col-lg-2' %>
+    <div class="col-md-8 col-lg-8">
+      <div class='input-group date' id='datetimepicker_start_time' >
+        <%= f.text_field :start_time, :class => 'form-control', :autocomplete => "off"%>
+        <span class="input-group-addon">
+          <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :实际结束时间, :class => 'control-label col-md-2 col-lg-2' %>
+    <div class="col-md-8 col-lg-8">
+      <div class='input-group date' id='datetimepicker_end_time' >
+        <%= f.text_field :end_time, :class => 'form-control', :autocomplete => "off"%>
+        <span class="input-group-addon">
+          <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :项目负责人, :class => 'control-label col-md-2 col-lg-2' %>
+    <div class="col-md-8 col-lg-8">
+      <%= f.text_field :charge, :class => 'form-control' %>
+    </div>
+  </div>
+
+  <!-- 配件表单 -->
+  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-10 col-md-offset-2">
+    <div class="widget  radius-bordered">
+      <div class="widget-header">
+        <span class="widget-caption">配件清单</span>
+      </div>
+      <div class="widget-body">
+        <div class="docs-example">
+          <div class="tab-content tabs-flat">
+            <div class="tab-pane active" id="material-tab">
+
+              
+              <% @project.projectMaterials.map {|projectMaterial|  %>
+              <div class="form-group has-feedback">
+                <label class="col-lg-2 control-label">配件：</label>
+                <div class="col-lg-6">
+                  <input type="text" readonly="readonly" class="form-control" value="<%=projectMaterial.material.name_with_unit%>" >
+                  <input type="hidden" name="projectMaterial[]" id="projectMaterial" value="<%=projectMaterial.material.id%>" >
+                </div>
+                <label class="col-lg-2 control-label">数量：</label>
+                <div class="col-lg-2">
+                  <input type="text" class="form-control" name="projectMaterialNum[]" id="projectMaterialNum" value="<%=projectMaterial.need_num%>">
+                </div>
+              </div>
+              <%} %>
+
+            </div>
+
+          </div>
+          <div class="form-group">
+            <div class="col-lg-8 col-lg-offset-4">
+              <button type="button" class="btn btn-palegreen" id="addMaterial">新增配件</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end 配件表单 -->
+
+  <!-- 产品表单 -->
+  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-10 col-md-offset-2">
+    <div class="widget  radius-bordered">
+      <div class="widget-header">
+        <span class="widget-caption">产品清单</span>
+      </div>
+      <div class="widget-body">
+        <div class="docs-example">
+          <div class="tab-content tabs-flat">
+            <div class="tab-pane active" id="product-tab">
+
+              
+              <% @project.projectProducts.map {|projectProduct|  %>
+              <div class="form-group has-feedback">
+                <label class="col-lg-2 control-label">产品：</label>
+                <div class="col-lg-6">
+                  <input type="text" readonly="readonly" class="form-control" value="<%=projectProduct.product.name_with_unit%>" >
+                  <input type="hidden" name="projectProduct[]" id="projectProduct" value="<%=projectProduct.product.id%>" >
+                </div>
+                <label class="col-lg-2 control-label">数量：</label>
+                <div class="col-lg-2">
+                  <input type="text" class="form-control" name="projectProductNum[]" id="projectProductNum" value="<%=projectProduct.need_num%>">
+                </div>
+              </div>
+              <%} %>
+
+            </div>
+
+          </div>
+          <div class="form-group">
+            <div class="col-lg-8 col-lg-offset-4">
+              <button type="button" class="btn btn-palegreen" id="addProduct">新增产品</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end 产品表单 -->
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-md-8 col-lg-8">
+      <%= f.submit "保存", :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                projects_path, :class => 'btn btn-default' %>
+    </div>
+  </div>
+<% end %>
+
+
+<!-- file 弹出框 -->
+<div id="material_dialog" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="title" aria-hidden="true">
+  <div class="modal-dialog" style="width:480px;">
+    <div class="modal-content">
+      <!-- 模框头部 -->
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"
+        aria-hidden="true">×
+      </button>
+      <h4 class="modal-title">请选择配件</h4>
+      </div>
+      <!-- 模框主体 -->
+      <div class="modal-body">
+
+        <div class="form-group has-feedback">
+          <label class="col-lg-3 control-label">配件：</label>
+          <div class="col-lg-6">
+            <select class="form-control" name="projectMaterial[]" id="material_dialog_meterial">
+              <%= options_from_collection_for_select(Material.all, :id, :name_with_unit) %>
+            </select>
+          </div>
+          <div class="col-lg-3">
+            <input type="text" class="form-control" name="projectMaterialNum[]" id="material_dialog_meterial_num" value="0">
+          </div>
+        </div>
+
+      </div>
+
+      <br>
+      <div class="form-group has-feedback alert alert-danger fade in" hidden="hidden" id="selectError">
+        <i class="fa-fw fa fa-times"></i>
+        <strong>错误!</strong> 配件已存在.
+      </div>
+
+      <!-- 模框底部 -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary"id="material_dialog_sureBtn">添加</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"id="material_dialog_cancelBtn">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end 弹出框 -->
+
+<!-- file 弹出框 -->
+<div id="product_dialog" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="title" aria-hidden="true">
+  <div class="modal-dialog" style="width:480px;">
+    <div class="modal-content">
+      <!-- 模框头部 -->
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"
+        aria-hidden="true">×
+      </button>
+      <h4 class="modal-title">请选择产品</h4>
+      </div>
+      <!-- 模框主体 -->
+      <div class="modal-body">
+
+        <div class="form-group has-feedback">
+          <label class="col-lg-3 control-label">产品：</label>
+          <div class="col-lg-6">
+            <select class="form-control" name="projectProduct[]" id="product_dialog_meterial">
+              <%= options_from_collection_for_select(Product.all, :id, :name_with_unit) %>
+            </select>
+          </div>
+          <div class="col-lg-3">
+            <input type="text" class="form-control" name="projectProductNum[]" id="product_dialog_product_num" value="0">
+          </div>
+        </div>
+
+      </div>
+
+      <br>
+      <div class="form-group has-feedback alert alert-danger fade in" hidden="hidden" id="selectError">
+        <i class="fa-fw fa fa-times"></i>
+        <strong>错误!</strong> 产品已存在.
+      </div>
+
+      <!-- 模框底部 -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary"id="product_dialog_sureBtn">添加</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"id="product_dialog_cancelBtn">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end 弹出框 -->
+
+<!--模板 -->
+<div class="form-group has-feedback" hidden="hidden" id="material_tmp">
+  <label class="col-lg-2 control-label">配件：</label>
+  <div class="col-lg-6">
+    <input type="text" readonly="readonly" id="project_material_name" class="form-control">
+    <input type="hidden" name="projectMaterial[]" id="project_material_id">
+  </div>
+  <label class="col-lg-2 control-label">数量：</label>
+  <div class="col-lg-2">
+    <input type="text" class="form-control" name="projectMaterialNum[]" id="project_material_num">
+  </div>
+</div>
+<!-- end 模板 -->
+
+<!--模板 -->
+<div class="form-group has-feedback" hidden="hidden" id="product_tmp">
+  <label class="col-lg-2 control-label">产品：</label>
+  <div class="col-lg-6">
+    <input type="text" readonly="readonly" id="project_product_name" class="form-control">
+    <input type="hidden" name="projectProduct[]" id="project_product_id">
+  </div>
+  <label class="col-lg-2 control-label">数量：</label>
+  <div class="col-lg-2">
+    <input type="text" class="form-control" name="projectProductNum[]" id="project_product_num">
+  </div>
+</div>
+<!-- end 模板 -->
+
+
+
+
+<script>
+
+$(function() {
+  $('#datetimepicker_plan_start_time').datepicker();
+  $('#datetimepicker_plan_end_time').datepicker();
+  $('#datetimepicker_start_time').datepicker();
+  $('#datetimepicker_end_time').datepicker();
+
+
+  $("#addMaterial").click(function(){
+    $("#material_dialog").modal().find("#selectError").hide();
+  });
+
+  $("#material_dialog_sureBtn").click(function(){
+    var isNewType = true;
+    var material_id = $("#material_dialog_meterial option:selected").val()
+    $("#material-tab input[name='projectMaterial[]']").each(function(){
+      if($(this).val() == material_id){
+        isNewType = false;
+      }
+    });
+
+    if(!isNewType){
+      $("#selectError").show();
+      return;
+    }else{
+      $("#material_dialog").find("#selectError").hide();
+    }
+
+    var $tmp = $("#material_tmp").clone();
+    $tmp.find("#project_material_name").val($("#material_dialog_meterial option:selected").text());
+    $tmp.find("#project_material_id").val(material_id);
+    $tmp.find("#project_material_num").val($("#material_dialog_meterial_num").val());
+    $tmp.show().appendTo($("#material-tab"));
+  });
+
+  $("#addProduct").click(function(){
+    $("#product_dialog").modal().find("#selectError").hide();
+  });
+
+  $("#product_dialog_sureBtn").click(function(){
+    var isNewType = true;
+    var material_id = $("#product_dialog_meterial option:selected").val()
+    $("#product-tab input[name='projectProduct[]']").each(function(){
+      if($(this).val() == material_id){
+        isNewType = false;
+      }
+    });
+
+    if(!isNewType){
+      $("#selectError").show();
+      return;
+    }else{
+      $("#product_dialog").find("#selectError").hide();
+    }
+
+    var $tmp = $("#product_tmp").clone();
+    $tmp.find("#project_product_name").val($("#product_dialog_meterial option:selected").text());
+    $tmp.find("#project_product_id").val(material_id);
+    $tmp.find("#project_product_num").val($("#product_dialog_product_num").val());
+    $tmp.show().appendTo($("#product-tab"));
+  });
+
+});
+
+</script>

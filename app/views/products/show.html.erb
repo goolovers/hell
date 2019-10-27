@@ -2,7 +2,7 @@
 
 <div class="form-horizontal product">
   <div class="form-group">
-    <label class="control-label col-md-2 col-lg-2" for="product_物料名称">物料名称</label>
+    <label class="control-label col-md-2 col-lg-2" for="product_物料名称">产品名称</label>
     <div class="col-md-8 col-lg-8">
       <input class="form-control" type="text" value="<%=@product.material_name%>" readonly="readonly">
     </div>
@@ -70,7 +70,7 @@
               <th><h5 class="no-margin-bottom text-center">物料名称</h5></th>
               <th><h5 class="no-margin-bottom text-center">物料编码</h5></th>
               <th><h5 class="no-margin-bottom text-center">数量</h5></th>
-              <th><h5 class="no-margin-bottom text-center">含税价格</h5></th>
+              <th><h5 class="no-margin-bottom text-center">含税单价</h5></th>
               <th><h5 class="no-margin-bottom text-center">总价</h5></th>
             </tr>
           </thead>
@@ -100,7 +100,7 @@
   <div class="form-group">
     <div class="col-lg-offset-2 col-md-8 col-lg-8">
       <%= link_to t('.back', :default => t("helpers.links.back")),
-      products_path, :class => 'btn btn-default'  %>
+      "javascript:window.history.back(-1);", :class => 'btn btn-default'  %>
       <%= link_to t('.edit', :default => t("helpers.links.edit")),
       edit_product_path(@product), :class => 'btn btn-default' %>
       <%= link_to t('.destroy', :default => t("helpers.links.destroy")),

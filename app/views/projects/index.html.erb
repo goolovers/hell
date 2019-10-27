@@ -1,0 +1,53 @@
+<%- model_class = Project -%>
+<% provide(:title, "库存管理 / 项目库") %>
+<div class="page-body">
+  <%= form_tag("/projects", method: "get") do %>
+  <div class="widget-body bordered-left bordered-warning form-inline">
+    <div class="form-group" >
+      <%= text_field_tag :query_name, params[:query_name], class: "form-control",  placeholder: "项目名称"%>
+    </div>
+    <input id="subLogin" class="btn btn-primary" name ="subLogin" type="submit" value="查询" />
+  </div>
+  <% end %>
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>项目名称</th>
+        <th>项目状态</th>
+        <th>计划开始时间</th>
+        <th>计划结束时间</th>
+        <th>实际开始时间</th>
+        <th>实际结束时间</th>
+        <th>项目负责人</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @projects.each do |project| %>
+      <tr>
+        <td><%= link_to project.name, project_path(project) %></td>
+        <td><%= codeName :project_status, project.status %></td>
+        <td><%= project.plan_start_time == nil ? "" : project.plan_start_time.to_s %></td>
+        <td><%= project.plan_end_time == nil ? "" : project.plan_end_time.to_s %></td>
+        <td><%= project.start_time == nil ? "" : project.start_time.to_s %></td>
+        <td><%= project.end_time == nil ? "" : project.end_time.to_s %></td>
+        <td><%= project.charge %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+          edit_project_path(project), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+          project_path(project),
+          :method => :delete,
+          :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+          :class => 'btn btn-xs btn-danger' %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <div style="text-align:right" >
+    <%=paginate@projects%>
+  </div>
+  <%= link_to t('.new', :default => "新增项目"), new_project_path, :class => 'btn btn-primary'%>
+</div>

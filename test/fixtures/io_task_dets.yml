@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  io_task_id: 1
+  material_id: 1
+  product_id: 1
+  num: 1
+
+two:
+  io_task_id: 1
+  material_id: 1
+  product_id: 1
+  num: 1

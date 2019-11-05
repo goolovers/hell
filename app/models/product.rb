@@ -9,6 +9,12 @@ class Product < ApplicationRecord
 	belongs_to :user
 	has_many :productItems
 
+	before_save :default_values
+
+	def default_values
+	  self.lower_num ||= 0
+	end
+
 	def name_with_unit
 	  return "#{self.material_name} (#{self.unit})"
 	end

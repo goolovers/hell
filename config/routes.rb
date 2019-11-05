@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :io_tasks
+  resources :storage_materials
   resources :projects
   resources :p_codes
   resources :products

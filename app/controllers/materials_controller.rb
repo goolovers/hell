@@ -6,10 +6,10 @@ class MaterialsController < ApplicationController
   # GET /materials.json
   def index
     @materials = Material.where("1=1")
-    @materials = @materials.where("material_name like ?",  "%#{params[:material_name]}%") if params[:material_name]
-    @materials = @materials.where("material_type like ?",  "%#{params[:material_type]}%") if params[:material_type]
-    @materials = @materials.where("material_code like ?",  "%#{params[:material_code]}%") if params[:material_code]
-    @materials = @materials.where("specs like ?",  "%#{params[:specs]}%") if params[:specs]
+    @materials = @materials.where("material_name like ?",  "%#{params[:material_name]}%") unless params[:material_name].blank?
+    @materials = @materials.where("material_type like ?",  "%#{params[:material_type]}%") unless params[:material_type].blank?
+    @materials = @materials.where("material_code like ?",  "%#{params[:material_code]}%") unless params[:material_code].blank?
+    @materials = @materials.where("specs like ?",  "%#{params[:specs]}%") unless params[:specs].blank?
     @materials = @materials.order("id desc").page(params[:page]).per 10
   end
 

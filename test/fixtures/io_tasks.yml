@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  io_type: MyString
+  io_reason: MyString
+  io_at: 2019-10-30 23:02:21
+  apply_user_id: 1
+  exec_user_id: 1
+  status: MyString
+  material_product_type: MyString
+  io_wh: MyString
+  project_id: 1
+
+two:
+  io_type: MyString
+  io_reason: MyString
+  io_at: 2019-10-30 23:02:21
+  apply_user_id: 1
+  exec_user_id: 1
+  status: MyString
+  material_product_type: MyString
+  io_wh: MyString
+  project_id: 1

@@ -1,0 +1,27 @@
+<%= form_with(model: storage_material, local: true) do |form| %>
+  <% if storage_material.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(storage_material.errors.count, "error") %> prohibited this storage_material from being saved:</h2>
+
+      <ul>
+        <% storage_material.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :num %>
+    <%= form.number_field :num %>
+  </div>
+
+  <div class="field">
+    <%= form.label :material_id %>
+    <%= form.number_field :material_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

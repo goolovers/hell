@@ -112,20 +112,24 @@
               <span class="menu-text"> 首页 </span>
             </a>
           </li>
+          <li>
+            <a href="/home">
+              <i class="menu-icon glyphicon glyphicon-tasks"></i>
+              <span class="menu-text"> 待办 </span>
+            </a>
+          </li>
 
           <!--系统管理-->
           <li>
             <a href="#" class="menu-dropdown">
               <i class="menu-icon typcn typcn-user"></i>
               <span class="menu-text"> 系统管理 </span>
-
               <i class="menu-expand"></i>
             </a>
 
             <ul class="submenu">
               <li>
                 <%=link_to '用户管理' , '/users'%>
-                
               </li>
               <li>
                 <a href="/p_codes">
@@ -142,7 +146,6 @@
             <a href="#" class="menu-dropdown">
               <i class="menu-icon fa fa-desktop"></i>
               <span class="menu-text"> 基础档案 </span>
-
               <i class="menu-expand"></i>
             </a>
 
@@ -162,34 +165,77 @@
           </li>
           <!--基础档案-->
 
-          <!--库存管理-->
+          <!--配件库-->
           <li class="">
             <a href="#" class="menu-dropdown">
               <i class="menu-icon typcn typcn-shopping-bag"></i>
-              <span class="menu-text"> 库存管理 </span>
+              <span class="menu-text"> 配件库管理 </span>
+              <i class="menu-expand"></i>
+            </a>
+
+            <ul class="submenu" style="display: none;">
+              <li>
+                <a href="/storage_materials">
+                  <span class="menu-text">库存信息</span>
+                </a>
+              </li>
+              <li>
+                <a href="/io_tasks">
+                  <span class="menu-text">出入库管理</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <!--配件库-->
+
+          <!--成品库-->
+          <li class="">
+            <a href="#" class="menu-dropdown">
+              <i class="menu-icon typcn typcn-shopping-bag"></i>
+              <span class="menu-text"> 成品库管理 </span>
+              <i class="menu-expand"></i>
+            </a>
+
+            <ul class="submenu" style="display: none;">
+              <li>
+                <a href="/storage_materials">
+                  <span class="menu-text">库存信息</span>
+                </a>
+              </li>
+              <li>
+                <a href="/products">
+                  <span class="menu-text">出入库管理</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <!--成品库-->
+
+          <!--项目管理-->
+          <li class="">
+            <a href="#" class="menu-dropdown">
+              <i class="menu-icon typcn typcn-shopping-bag"></i>
+              <span class="menu-text"> 项目库 </span>
 
               <i class="menu-expand"></i>
             </a>
 
             <ul class="submenu" style="display: none;">
               <li>
-                <a href="/materials">
-                  <span class="menu-text">原材料库</span>
+                <a href="/projects">
+                  <span class="menu-text">项目信息</span>
                 </a>
               </li>
               <li>
                 <a href="/products">
-                  <span class="menu-text">成品库</span>
-                </a>
-              </li>
-              <li>
-                <a href="/projects">
-                  <span class="menu-text">项目库</span>
+                  <span class="menu-text">出入库管理</span>
                 </a>
               </li>
             </ul>
           </li>
-          <!--基础档案-->
+          <!--项目管理-->
+
+
 
         </ul>
         <!-- /Sidebar Menu -->
@@ -243,6 +289,6 @@
 <script src="/bootstraptmp/js/beyond.min.js"></script>
 <script src="/bootstraptmp/js/datetime/bootstrap-datepicker.js"></script>
 <script src="/bootstraptmp/js/locales/bootstrap-datepicker.zh-CN.min.js"></script>
-
+<script src="/bootstraptmp/js/select2/select2.js"></script>
 </body>
 </html>

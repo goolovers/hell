@@ -4,7 +4,7 @@ class PCodesController < ApplicationController
   # GET /p_codes
   def index
     @p_codes = PCode.where("1=1")
-    @p_codes = PCode.where(["type_code like ? ", "%#{params[:type_code]}%"]) if params[:type_code]
+    @p_codes = PCode.where(["type_code like ? ", "%#{params[:type_code]}%"]) unless params[:type_code].blank?
     @p_codes = @p_codes.order("id desc").page(params[:page]).per 10
   end
 

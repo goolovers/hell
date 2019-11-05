@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Io type:</strong>
+  <%= @io_task.io_type %>
+</p>
+
+<p>
+  <strong>Io reason:</strong>
+  <%= @io_task.io_reason %>
+</p>
+
+<p>
+  <strong>Io at:</strong>
+  <%= @io_task.io_at %>
+</p>
+
+<p>
+  <strong>Apply user:</strong>
+  <%= @io_task.apply_user_id %>
+</p>
+
+<p>
+  <strong>Exec user:</strong>
+  <%= @io_task.exec_user_id %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @io_task.status %>
+</p>
+
+<p>
+  <strong>Material product type:</strong>
+  <%= @io_task.material_product_type %>
+</p>
+
+<p>
+  <strong>Io wh:</strong>
+  <%= @io_task.io_wh %>
+</p>
+
+<p>
+  <strong>Project:</strong>
+  <%= @io_task.project_id %>
+</p>
+
+<%= link_to 'Edit', edit_io_task_path(@io_task) %> |
+<%= link_to 'Back', io_tasks_path %>

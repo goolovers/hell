@@ -4,7 +4,7 @@ class ProjectsController < ApplicationController
   # GET /projects
   def index
     @projects = Project.where("1=1")
-    @projects = Project.where("name like ?", "%#{params[:query_name]}%") if params[:query_name]
+    @projects = Project.where("name like ?", "%#{params[:query_name]}%") unless params[:query_name].blank?
     @projects = @projects.order("id desc").page(params[:page]).per 10
   end
 

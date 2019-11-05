@@ -4,10 +4,10 @@ class ProductsController < ApplicationController
   # GET /products
   def index
     @products = Product.where("1=1")
-    @products = @products.where("material_name like ?",  "%#{params[:material_name]}%") if params[:material_name]
-    @products = @products.where("material_type like ?",  "%#{params[:material_type]}%") if params[:material_type]
-    @products = @products.where("material_code like ?",  "%#{params[:material_code]}%") if params[:material_code]
-    @products = @products.where("specs like ?",  "%#{params[:specs]}%") if params[:specs]
+    @products = @products.where("material_name like ?",  "%#{params[:material_name]}%") unless params[:material_name].blank?
+    @products = @products.where("material_type like ?",  "%#{params[:material_type]}%") unless params[:material_type]
+    @products = @products.where("material_code like ?",  "%#{params[:material_code]}%") unless params[:material_code]
+    @products = @products.where("specs like ?",  "%#{params[:specs]}%") unless params[:specs].blank?
     @products = @products.order("id desc").page(params[:page]).per 10
   end
 

@@ -1,6 +1,158 @@
-<div class="login-container animated fadeInDown">
-        
-            <div class="loginbox-textbox">
-                已登录，欢迎：<%= current_user.user_name %>
-            </div>
+<% provide(:title, "欢迎使用 -- 残疾版 仓储管理系统V0.1") %>
+<div class="col-lg-12">
+	<div class="widget">
+		<div class="widget-header bordered-bottom bordered-themesecondary">
+			<i class="widget-icon fa fa-tags themesecondary"></i>
+			<span class="widget-caption themesecondary">系统设计功能</span>
+		</div><!--Widget Header-->
+		<div class="widget-body">
+			<div class="widget-main no-padding">
+				<div class="tickets-container">
+					<ul class="tickets-list">
+						<li class="ticket-item">
+							<div class="row">
+								<div class="ticket-user col-lg-8">
+									<span class="user-name">用户管理：</span>
+									<span class="user-company">分为管理员和普通用户两种角色，系统默认超级管理员admin</span>
+								</div>
+								<div class="ticket-time  col-lg-4">
+									<div class="divider hidden-md hidden-sm hidden-xs"></div>
+									<i class="fa fa-clock-o"></i>
+									<span class="time">2019-10-22</span>
+								</div>
+								<div class="ticket-state bg-palegreen">
+									<i class="fa fa-check"></i>
+								</div>
+							</div>
+						</li>
+
+
+						<li class="ticket-item">
+							<div class="row">
+								<div class="ticket-user col-lg-8">
+									<span class="user-name">权限管理：</span>
+									<span class="user-company">区分管理员权限和普通用户权限，可查看的内容和业务限制</span>
+								</div>
+								<div class="ticket-time  col-lg-4">
+									<div class="divider hidden-md hidden-sm hidden-xs"></div>
+									<i class="fa fa-clock-o"></i>
+									<span class="time">延迟实现</span>
+								</div>
+								<div class="ticket-state bg-darkorange">
+									<i class="fa fa-times"></i>
+								</div>
+							</div>
+						</li>
+
+						<li class="ticket-item">
+							<div class="row">
+								<div class="ticket-user col-lg-8">
+									<span class="user-name">配件档案：</span>
+									<span class="user-company">所有直接采购的，无需组装的原材料管理</span>
+								</div>
+								<div class="ticket-time  col-lg-4">
+									<div class="divider hidden-md hidden-sm hidden-xs"></div>
+									<i class="fa fa-clock-o"></i>
+									<span class="time">2019-10-22</span>
+								</div>
+								<div class="ticket-state bg-palegreen">
+									<i class="fa fa-check"></i>
+								</div>
+							</div>
+						</li>
+
+						<li class="ticket-item">
+							<div class="row">
+								<div class="ticket-user col-lg-8">
+									<span class="user-name">产品档案：</span>
+									<span class="user-company">如射频门、小车等组装好的成品，可设置产品的配件清单</span>
+								</div>
+								<div class="ticket-time  col-lg-4">
+									<div class="divider hidden-md hidden-sm hidden-xs"></div>
+									<i class="fa fa-clock-o"></i>
+									<span class="time">2019-10-22</span>
+								</div>
+								<div class="ticket-state bg-palegreen">
+									<i class="fa fa-check"></i>
+								</div>
+							</div>
+						</li>
+
+
+						<li class="ticket-item">
+							<div class="row">
+								<div class="ticket-user col-lg-8">
+									<span class="user-name">产品管理：</span>
+									<span class="user-company">是否需要给每个产品编号，精益化管理每个产品的状态，还是与配件一样，只管理数量</span>
+								</div>
+								<div class="ticket-time  col-lg-4">
+									<div class="divider hidden-md hidden-sm hidden-xs"></div>
+									<i class="fa fa-clock-o"></i>
+									<span class="time">2019-10-30</span>
+								</div>
+								<div class="ticket-state bg-yellow">
+									<i class="fa fa-info"></i>
+								</div>
+							</div>
+						</li>
+
+						<li class="ticket-item">
+							<div class="row">
+								<div class="ticket-user col-lg-8">
+									<span class="user-name">配件库：</span>
+									<span class="user-company">可查询当前配件库存数量、预警数量；执行配件出入库</span>
+								</div>
+								<div class="ticket-time  col-lg-4">
+									<div class="divider hidden-md hidden-sm hidden-xs"></div>
+									<i class="fa fa-clock-o"></i>
+									<span class="time">努力实现中</span>
+								</div>
+								<div class="ticket-state bg-darkorange">
+									<i class="fa fa-times"></i>
+								</div>
+							</div>
+						</li>
+
+						<li class="ticket-item">
+							<div class="row">
+								<div class="ticket-user col-lg-8">
+									<span class="user-name">产品库：</span>
+									<span class="user-company">可查询产品库存数量、预警数量；执行产品出入库</span>
+								</div>
+								<div class="ticket-time  col-lg-4">
+									<div class="divider hidden-md hidden-sm hidden-xs"></div>
+									<i class="fa fa-clock-o"></i>
+									<span class="time">努力实现中</span>
+								</div>
+								<div class="ticket-state bg-darkorange">
+									<i class="fa fa-times"></i>
+								</div>
+							</div>
+						</li>
+
+						<li class="ticket-item">
+							<div class="row">
+								<div class="ticket-user col-lg-8">
+									<span class="user-name">项目库：</span>
+									<span class="user-company">可管理项目、项目需要使用的配件和产品，项目成本；执行所需物资出入库</span>
+								</div>
+								<div class="ticket-time  col-lg-4">
+									<div class="divider hidden-md hidden-sm hidden-xs"></div>
+									<i class="fa fa-clock-o"></i>
+									<span class="time">努力实现中</span>
+								</div>
+								<div class="ticket-state bg-darkorange">
+									<i class="fa fa-times"></i>
+								</div>
+							</div>
+						</li>
+
+
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
 </div>
+

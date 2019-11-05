@@ -10,13 +10,44 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_27_092143) do
+ActiveRecord::Schema.define(version: 2019_11_04_094132) do
+
+  create_table "_storage_materials_old_20191030", force: :cascade do |t|
+    t.integer "num"
+    t.integer "material_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "lower_num"
+  end
 
   create_table "_users_old_20191011", force: :cascade do |t|
     t.string "user_code"
     t.string "user_name"
     t.string "password"
     t.integer "user_type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "io_task_dets", force: :cascade do |t|
+    t.integer "io_task_id"
+    t.integer "material_id"
+    t.integer "product_id"
+    t.integer "num"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "io_tasks", force: :cascade do |t|
+    t.string "io_type"
+    t.string "io_reason"
+    t.datetime "io_at"
+    t.integer "apply_user_id"
+    t.integer "exec_user_id"
+    t.string "status"
+    t.string "material_product_type"
+    t.string "io_wh"
+    t.integer "project_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -37,6 +68,7 @@ ActiveRecord::Schema.define(version: 2019_10_27_092143) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
+    t.integer "lower_num"
   end
 
   create_table "p_codes", force: :cascade do |t|
@@ -68,6 +100,7 @@ ActiveRecord::Schema.define(version: 2019_10_27_092143) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
+    t.integer "lower_num"
   end
 
   create_table "project_materials", force: :cascade do |t|
@@ -100,6 +133,13 @@ ActiveRecord::Schema.define(version: 2019_10_27_092143) do
     t.datetime "start_time"
     t.datetime "end_time"
     t.string "charge"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "storage_materials", force: :cascade do |t|
+    t.integer "num"
+    t.integer "material_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

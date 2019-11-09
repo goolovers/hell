@@ -1,0 +1,2 @@
+module StorageProductsHelper
+end

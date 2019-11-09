@@ -13,6 +13,7 @@ en:
         material_name: "物料名称"
         material_code: "物料编码" 
         after_tax: "含税单价"
+        lower_num: "库存预警数量"
 
       product:  
         material_name: "产品名称"

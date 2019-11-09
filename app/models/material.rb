@@ -6,6 +6,7 @@ class Material < ApplicationRecord
 	validates :material_code, uniqueness: { message: "已存在" }
 
 	validates :after_tax, presence: {message:'不可为空！'}
+	validates :lower_num, presence: {message:'不可为空！'}
 
 	belongs_to :user
 

@@ -1,5 +1,5 @@
-class StorageMaterial < ApplicationRecord
-	belongs_to :material
+class StorageProduct < ApplicationRecord
+	belongs_to :product
 	before_save :default_values
 
 	def default_values

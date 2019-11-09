@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_04_094132) do
+ActiveRecord::Schema.define(version: 2019_11_09_093036) do
 
   create_table "_storage_materials_old_20191030", force: :cascade do |t|
     t.integer "num"
@@ -50,6 +50,8 @@ ActiveRecord::Schema.define(version: 2019_11_04_094132) do
     t.integer "project_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "check_user_id"
+    t.string "remark"
   end
 
   create_table "materials", force: :cascade do |t|
@@ -140,6 +142,13 @@ ActiveRecord::Schema.define(version: 2019_11_04_094132) do
   create_table "storage_materials", force: :cascade do |t|
     t.integer "num"
     t.integer "material_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "storage_products", force: :cascade do |t|
+    t.integer "num"
+    t.integer "product_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

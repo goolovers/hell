@@ -1,0 +1,238 @@
+<%- model_class = IoTask -%>
+<% provide(:title, "配件库管理 / 出入库管理 / 入库") %>
+
+<%= form_for @io_task, :html => { :class => "form-horizontal io_task" } do |f| %>
+<% if @io_task.errors.any? %>
+<div id="error_expl" class="panel panel-danger">
+	<div class="panel-heading">
+		<h3 class="panel-title"><%= pluralize(@io_task.errors.count, "处校验错误").to_s.chop %>:</h3>
+	</div>
+	<div class="panel-body">
+		<ul>
+			<% @io_task.errors.full_messages.each do |msg| %>
+			<li><%= msg %></li>
+			<% end %>
+		</ul>
+	</div>
+</div>
+<% end %>
+
+<div class="form-group">
+	<%= f.label :出入库类型, :class => 'control-label col-md-2 col-lg-2' %>
+	<div class="col-md-8 col-lg-8">
+		<input class="form-control" type="text" value="<%=codeName :io_type , @io_task.io_type%>" readonly="readonly">
+		<input type="hidden" class="form-control" type="text" name="io_task[io_type]" value="<%=@io_task.io_type%>">
+	</div>
+</div>
+
+<div class="form-group">
+	<%= f.label :入库原因, :class => 'control-label col-md-2 col-lg-2' %>
+	<div class="col-md-8 col-lg-8">
+		<%= f.collection_select(:io_reason, getPCodes("io_in_reason"), :code, :name , {},:class => "form-control") if @io_task.io_type == "in" %>
+		<%= f.collection_select(:io_reason, getPCodes("io_out_reason"), :code, :name , {},:class => "form-control") if @io_task.io_type == "out" %>
+	</div>
+</div>
+
+<div class="form-group">
+	<%= f.label :备注, :class => 'control-label col-md-2 col-lg-2' %>
+	<div class="col-md-8 col-lg-8">
+		<textarea class="form-control" rows="3" name="io_task[remark]" placeholder="Content" style="margin: 0px 34.6px 0px 0px; width: 554px; height: 84px;"></textarea>
+	</div>
+</div>
+
+
+<!-- 配件表单 -->
+<div class="col-lg-8 col-md-8  col-md-offset-2">
+	<div class="widget  radius-bordered">
+		<div class="widget-header">
+			<span class="widget-caption">配件入库明细</span>
+		</div>
+		<div class="widget-body">
+			<div class="docs-example">
+				<div class="tab-content tabs-flat">
+					<div class="tab-pane active" >
+
+						<div class="tickets-container">
+							<ul class="tickets-list" id="material-tab"> 
+
+							</ul>
+						</div>
+
+					</div>
+
+				</div>
+				<div class="form-group">
+					<div class="col-lg-8 col-lg-offset-4">
+						<button type="button" class="btn btn-palegreen" id="addMaterial">新增配件</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end 配件表单 -->
+
+<!--material Modal -->
+<div id="material_model" style="display: none;">
+	<div class="row">
+		<div class="col-md-12">
+			
+		</div>
+	</div>
+</div>
+<!--End material model-->
+
+<!-- file 弹出框 -->
+<div id="material_dialog" class="modal fade col-md-12" tabindex="-1" role="dialog" aria-labelledby="title" aria-hidden="true">
+	<div class="col-md-8 col-md-offset-2 col-md-offset-3" style="top:80px">
+		<div class="modal-content">
+			<!-- 模框头部 -->
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+				aria-hidden="true">×
+			</button>
+			<h4 class="modal-title">请选择入库配件</h4>
+		</div>
+		<!-- 模框主体 -->
+		<div class="modal-body">
+
+			<table class="table table-striped table-bordered table-hover" id="simpledatatable">
+				<thead>
+					<tr>
+						<th>物料名称</th>
+		        <th>设备类别</th>
+		        <th>物料编码</th>
+		        <th>规格型号</th>
+		        <th>单位</th>
+		        <th>品牌</th>
+		        <th>操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% Material.all.each do |material| %>
+					<tr>
+						<td><%= material.material_name %></td>
+						<td><%= material.material_type %></td>
+						<td><%= material.material_code %></td>
+						<td><%= material.specs %></td>
+						<td><%= material.unit %></td>
+		        <td><%= material.brand %></td>
+		        <th><a href="javascript:void(0)" name="add_material_button" material_id="<%=material.id%>" material_name='<%=material.material_name%>'>选择入库</a></th>
+					</tr>
+					<%end%>
+					
+
+				</tbody>
+			</table>
+
+		</div>
+
+		<br>
+		<div class="form-group has-feedback alert alert-danger fade in" hidden="hidden" id="selectError">
+			<i class="fa-fw fa fa-times"></i>
+			<strong>错误!</strong> 配件已存在.
+		</div>
+
+		<!-- 模框底部 -->
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal"id="material_dialog_cancelBtn">关闭</button>
+		</div>
+	</div>
+</div>
+</div>
+<!-- end 弹出框 -->
+
+
+
+<li class="ticket-item" hidden="hidden" id="material_tmp">
+	<div class="row"  >
+		<div class="ticket-time  col-lg-4">
+			<span class="user-name">配件：</span>
+			<span class="user-company" id="product_material_name">物料名称</span>
+			<input type="hidden" name="productMaterial[]" id="product_material_id">
+		</div>
+		<div class="ticket-time  col-lg-5" style="float: left;">
+			<div class="divider hidden-md hidden-sm hidden-xs"></div>
+			<span class="user-name">入库数量：</span>
+			<input type="number" min="0" style="width:100px"  name="productMaterialNum[]" id="product_material_num">
+		</div>
+	</div>
+</li>
+
+
+<div class="form-group">
+	<div class="col-lg-offset-2 col-md-8 col-lg-8">
+		<button type="button" class="btn btn-primary" id="saveForm">保存</button>
+		<%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+		io_tasks_path, :class => 'btn btn-default' %>
+	</div>
+</div>
+<% end %>
+
+<script>
+
+	$(function() {
+
+		var oTable = $('#simpledatatable').dataTable({
+			"sDom": "Tflt<'row DTTTFooter'<'col-sm-6'i><'col-sm-6'p>>",
+			"iDisplayLength": 7,
+			paging: false,
+			"oTableTools": {
+				"aButtons": [
+				]
+			},
+			"language": {
+				"search": "",
+				"sLengthMenu": "_MENU_",
+				"sInfoEmpty": "",
+				"sInfo": "",
+				"sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+			},
+			"aoColumns": [
+			null,
+			null,
+			null,
+			null,
+			null,
+			null,
+			null
+			],
+			"aaSorting": []
+		});
+
+		$("#addMaterial").click(function(){
+			$("#material_dialog").modal();
+			$("#material_dialog").find("#selectError").hide();
+		});
+
+		$("a[name='add_material_button']").click(function(){
+			var id = $(this).attr("material_id");
+			var name = $(this).attr("material_name");
+			var isNewType = true;
+			$("#material-tab input[name='productMaterial[]']").each(function(){
+				if($(this).val() == id){
+					isNewType = false;
+				}
+			});
+
+			if(!isNewType){
+				$("#selectError").show();
+				return;
+			}else{
+				$("#material_dialog").find("#selectError").hide();
+			}
+
+			var $tmp = $("#material_tmp").clone();
+			$tmp.find("#product_material_name").html(name);
+			$tmp.find("#product_material_id").val(id);
+			$tmp.show().appendTo($("#material-tab"));
+			$(this).html("已选择")
+		});
+		
+
+		$("#saveForm").click(function(){
+			$("form").submit();
+		});
+	});
+
+</script>

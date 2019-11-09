@@ -1,4 +1,4 @@
-class IoTasksController < ApplicationController
+class ProjectIoTasksController < ApplicationController
   before_action :set_io_task, only: [:show, :edit, :update, :destroy, :check, :out]
 
   # GET /io_tasks
@@ -10,18 +10,18 @@ class IoTasksController < ApplicationController
     @io_tasks = @io_tasks.order("id desc").page(params[:page]).per 10
   end
 
-  # GET /io_tasks/1
+  # GET /project_io_tasks/1
   def show
   end
 
-  # GET /io_tasks/new
+  # GET /projectio_tasks/new
   def new
     @io_task = IoTask.new
     @io_task.io_type = params[:io_type]
     render @io_task.io_type
   end
 
-  # GET /io_tasks/1/edit
+  # GET /project_io_tasks/1/edit
   def edit
   end
 
@@ -100,7 +100,7 @@ class IoTasksController < ApplicationController
   # DELETE /io_tasks/1
   def destroy
     @io_task.destroy
-    redirect_to io_tasks_url, notice: 'Io task was successfully destroyed.'
+    redirect_to project_io_tasks_url, notice: 'Io task was successfully destroyed.'
   end
 
   private

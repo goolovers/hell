@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  resources :io_tasks
+  
+  resources :storage_products
   resources :storage_materials
   resources :projects
   resources :p_codes
@@ -7,6 +8,15 @@ Rails.application.routes.draw do
   resources :materials
   resources :tests
   resources :users
+
+  resources :io_tasks
+  get 'io_tasks/:id/check', to: 'io_tasks#check', as: 'check_io_task'
+  get 'io_tasks/:id/out', to: 'io_tasks#out', as: 'out_io_task'
+
+  resources :project_io_tasks
+  get 'project_io_tasks/:id/check', to: 'project_io_tasks#check', as: 'check_project_io_task'
+  get 'project_io_tasks/:id/out', to: 'project_io_tasks#out', as: 'out_project_io_task'
+
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'

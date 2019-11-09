@@ -13,9 +13,9 @@ Rails.application.routes.draw do
   get 'io_tasks/:id/check', to: 'io_tasks#check', as: 'check_io_task'
   get 'io_tasks/:id/out', to: 'io_tasks#out', as: 'out_io_task'
 
-  resources :project_io_tasks
-  get 'project_io_tasks/:id/check', to: 'project_io_tasks#check', as: 'check_project_io_task'
-  get 'project_io_tasks/:id/out', to: 'project_io_tasks#out', as: 'out_project_io_task'
+  resources :product_io_tasks
+  get 'product_io_tasks/:id/check', to: 'product_io_tasks#check', as: 'check_product_io_task'
+  get 'product_io_tasks/:id/out', to: 'product_io_tasks#out', as: 'out_product_io_task'
 
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'

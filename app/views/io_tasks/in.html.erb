@@ -72,6 +72,15 @@
 </div>
 <!-- end 配件表单 -->
 
+<div class="form-group">
+	<div class="col-lg-offset-2 col-md-8 col-lg-8">
+		<button type="button" class="btn btn-primary" id="saveForm">保存</button>
+		<%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+		io_tasks_path, :class => 'btn btn-default' %>
+	</div>
+</div>
+<% end %>
+
 <!--material Modal -->
 <div id="material_model" style="display: none;">
 	<div class="row">
@@ -160,14 +169,7 @@
 </li>
 
 
-<div class="form-group">
-	<div class="col-lg-offset-2 col-md-8 col-lg-8">
-		<button type="button" class="btn btn-primary" id="saveForm">保存</button>
-		<%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-		io_tasks_path, :class => 'btn btn-default' %>
-	</div>
-</div>
-<% end %>
+
 
 <script>
 

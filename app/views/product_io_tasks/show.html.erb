@@ -1,5 +1,5 @@
 <%- model_class = IoTask -%>
-<% provide(:title, "配件库管理 / 出入库管理 / 出入库明细") %>
+<% provide(:title, "成品库管理 / 出入库管理 / 出入库明细") %>
 
 <%= form_for @io_task, :html => { :class => "form-horizontal io_task" } do |f| %>
 
@@ -71,7 +71,7 @@
 <div class="col-lg-8 col-md-8  col-md-offset-2">
   <div class="widget  radius-bordered">
     <div class="widget-header">
-      <span class="widget-caption">配件出入库明细</span>
+      <span class="widget-caption">成品出入库明细</span>
     </div>
     <div class="widget-body">
       <div class="docs-example">
@@ -93,12 +93,12 @@
               <tbody>
                 <% @io_task.ioTaskDet.each do |ioTaskDet| %>
                 <tr>
-                  <td><%= link_to ioTaskDet.material.material_name, material_path(ioTaskDet.material.id) %></td>
-                  <td><%= ioTaskDet.material.material_type %></td>
-                  <td><%= ioTaskDet.material.material_code %></td>
-                  <td><%= ioTaskDet.material.specs %></td>
-                  <td><%= ioTaskDet.material.unit %></td>
-                  <td><%= ioTaskDet.material.brand %></td>
+                  <td><%= link_to ioTaskDet.product.material_name, product_path(ioTaskDet.product.id) %></td>
+                  <td><%= ioTaskDet.product.material_type %></td>
+                  <td><%= ioTaskDet.product.material_code %></td>
+                  <td><%= ioTaskDet.product.specs %></td>
+                  <td><%= ioTaskDet.product.unit %></td>
+                  <td><%= ioTaskDet.product.brand %></td>
                   <td><%= ioTaskDet.num %></td>
                 </tr>
                 <%end%>
@@ -110,11 +110,7 @@
           </div>
 
         </div>
-        <div class="form-group">
-          <div class="col-lg-8 col-lg-offset-4">
-            <button type="button" class="btn btn-palegreen" id="addMaterial">新增配件</button>
-          </div>
-        </div>
+        
       </div>
     </div>
   </div>
@@ -125,16 +121,16 @@
 <div class="form-group">
   <div class="col-lg-offset-2 col-md-8 col-lg-8">
     
-    <%= link_to(check_io_task_path(@io_task),:class => 'btn btn-success') do %>
+    <%= link_to(check_product_io_task_path(@io_task),:class => 'btn btn-success') do %>
     审批通过 <i class="fa fa-check right"></i>
     <% end if @io_task.status == "before_examine"%>
 
-    <%= link_to(out_io_task_path(@io_task),:class => 'btn btn-primary') do %>
+    <%= link_to(out_product_io_task_path(@io_task),:class => 'btn btn-primary') do %>
     执行出入库 <i class="fa fa-shopping-cart"></i></i>
     <% end if @io_task.status == "after_examine"%>
 
     <%= link_to t('.cancel', :default => t("helpers.links.back")),
-    io_tasks_path, :class => 'btn btn-default' %>
+    product_io_tasks_path, :class => 'btn btn-default' %>
 
   </div>
 </div>

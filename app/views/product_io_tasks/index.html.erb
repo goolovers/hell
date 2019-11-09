@@ -2,7 +2,7 @@
 <% provide(:title, "成品库管理 / 出入库管理") %>
 
 <div class="page-body">
-  <%= form_tag("/io_tasks", method: "get") do %>
+  <%= form_tag("/product_io_tasks", method: "get") do %>
   <div class="widget-body bordered-left bordered-warning form-inline">
     <div class="form-group col-lg-2" >
       <select class="form-control" name="io_type" id="io_type" style="width: 100%">
@@ -48,7 +48,7 @@
     <tbody>
       <% @io_tasks.each do |io_task| %>
       <tr>
-        <td><%= link_to codeName(:io_type,io_task.io_type), io_task_path(io_task) %></td>
+        <td><%= link_to codeName(:io_type,io_task.io_type), product_io_task_path(io_task) %></td>
         <td><%=codeName :io_out_reason,io_task.io_reason if io_task.io_type.eql? "out"%>
           <%=codeName :io_in_reason,io_task.io_reason if io_task.io_type.eql? "in"%>
         </td>
@@ -60,17 +60,17 @@
         <td><%= io_task.io_at == nil ? "" : io_task.io_at.to_s%></td>
         <td>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-          io_task_path(io_task),
+          product_io_task_path(io_task),
           :method => :delete,
           :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
           :class => 'btn btn-xs btn-danger' unless io_task.status == "after_out"%>
           
 
-          <%= link_to(check_io_task_path(io_task),:class => 'btn btn-success btn-xs') do %>
+          <%= link_to(check_product_io_task_path(io_task),:class => 'btn btn-success btn-xs') do %>
             审批通过 <i class="fa fa-check right"></i>
           <% end if io_task.status == "before_examine"%>
 
-          <%= link_to(out_io_task_path(io_task),:class => 'btn btn-primary btn-xs') do %>
+          <%= link_to(out_product_io_task_path(io_task),:class => 'btn btn-primary btn-xs') do %>
             执行<%=codeName(:io_type,io_task.io_type)%> <i class="fa fa-shopping-cart"></i></i>
           <% end if io_task.status == "after_examine"%>
 
@@ -85,8 +85,8 @@
   </div>
 
   <div class="form-title" align="left">
-    <a class="btn btn-default purple" href="<%=new_io_task_path%>?io_type=in"><i class="fa fa-plus"></i>入库申请</a>
-    <a class="btn btn-primary" href="<%=new_io_task_path%>?io_type=out"><i class="fa fa-shopping-cart"></i>出库申请</a>
+    <a class="btn btn-default purple" href="<%=new_product_io_task_path%>?io_type=in"><i class="fa fa-plus"></i>入库申请</a>
+    <a class="btn btn-primary" href="<%=new_product_io_task_path%>?io_type=out"><i class="fa fa-shopping-cart"></i>出库申请</a>
   </div>
 
 </div>

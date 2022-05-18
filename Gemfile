@@ -20,7 +20,7 @@ gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
 
-gem 'nokogiri', '~>1.10.4'
+gem 'nokogiri', '~>1.13.5'
 
 #gem 'will_paginate', '3.1.6'
 #gem 'will_paginate-bootstrap'
